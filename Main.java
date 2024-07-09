@@ -1,7 +1,11 @@
-echo "# aula-pratica-tdd" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/landeilsonveloso/aula-pratica-tdd.git
-git push -u origin main
+class Dollar {
+    int amount = 10;
+    Dollar(int amount) {}			
+    void times(int multiplier) {}
+ }	
+
+ public void testMultiplication() {
+    Dollar five = new Dollar(5);
+    five.times(2);
+    assertEquals(10, five.amount);
+ }
