@@ -17,17 +17,9 @@ class Dollar extends Money {
  }
 
  public void testEquality() {
-    assertTrue(Money.dollar(5).equals(Money.dollar(5)));
+    assertTrue(Money.dollar(5).equals(Money.dollar(5))); 
     assertFalse(Money.dollar(5).equals(Money.dollar(6)));
-    assertTrue(Money.franc(5).equals(Money.franc(5)));
-    assertFalse(Money.franc(5).equals(Money.franc(6)));
     assertFalse(Money.franc(5).equals(Money.dollar(5)));
- }
-
- public void testFrancMultiplication() {
-    Money five = Money.franc(5);
-    assertEquals(Money.franc(10), five.times(2));
-    assertEquals(Money.franc(15), five.times(3));
  }
 
  public boolean equals(Object object)  {
@@ -69,7 +61,11 @@ class Dollar extends Money {
     
     public boolean equals(Object object) {
         Money money = (Money) object;
-        return amount == money.amount && getClass().equals(money.getClass());
+        return amount == money.amount && currency().equals(money.currency());
+    }
+      
+     Money times(int multiplier) {
+        return new Money(amount * multiplier, currency);
     }
 
     static Dollar dollar(int amount)  {
@@ -79,17 +75,17 @@ class Dollar extends Money {
     abstract Money times(int multiplier);
 
     static Money dollar(int amount)  {
-        return new Dollar(amount, "USD");
+        return new Money(amount, "USD");
     }
-     
+  
      static Money franc(int amount) {
-        return new Franc(amount, "CHF");
+        return new Money(amount, "CHF");
     }
 
     Money(int amount, String currency) {
         this.amount = amount;
         this.currency = currency;
-     }
+    }
 
     String currency() {
         return currency;
